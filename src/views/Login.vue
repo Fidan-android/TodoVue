@@ -23,6 +23,7 @@
         methods: {
             onSubmit: function(e) {
                 e.preventDefault();
+                login(e.target)
                 console.log("hello");
             }
         }
