@@ -273,7 +273,7 @@ textarea {
     left: 0;
     z-index: 1000;
     background: rgba(0, 0, 0, 0.9);
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: flex-start;
     padding: 60px 15px;

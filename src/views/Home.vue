@@ -13,7 +13,7 @@
           <div class="content__wrapper">
               <p class="mini_title">list of todo</p>
               <div class="items" v-if="loaded">
-                <Todo v-for="todo in todoes" :key="todo.id" :title="todo.title" :message="todo.message" :created="todo.created"></Todo>
+                <Todo v-for="todo in todoes" :key="todo.id" v-on:click.native="showForm(todo.id)" :title="todo.title" :message="todo.message" :created="todo.created"></Todo>
               </div>
               <div class="no-item" v-if="!loaded">No todoes</div>
               <button class="btn_add"></button>
@@ -21,62 +21,9 @@
       </div>
 
       <!-- Модальные окна -->
-      <div class="modal">
-          <div class="modal__content">
-              <div class="m-header">
-                  <h2 class="title">to do list</h2>
-                  <a class="close_btn" id="close"></a>
-              </div>
-              <div class="m-section" align="center">
-                  <form>
-                      <input type="text" class="field-profile" placeholder="Title">
-                      <textarea class="field-profile" placeholder="Description"></textarea>
-                      <input type="date" class="field-profile" value="Date">
-                      <input type="submit" class="m-white_btn" value="save" style="width: 100%;">
-                  </form>
-              </div>
-          </div>
-      </div>
+      <TodoForm ref="todo-form"/>
 
-      <div class="info_item">
-          <div class="modal__content">
-              <div class="i-header">
-                  <a class="arr_btn" id="close_info"></a>
-                  <div class="special_btns">
-                      <a class="pen_btn"></a>
-                      <a class="del_btn"></a>
-                  </div>
-              </div>
-              <div class="i-section">
-                  <p class="title_item"></p>
-                  <textarea class="title_text" readonly></textarea>
-                  <p class="title_date" align="center"></p>
-              </div>
-          </div>
-      </div>
-
-      <div class="info_item">
-          <div class="modal__content">
-              <div class="i-header">
-                  <a class="arr_btn"></a>
-                  <div class="special_btns">
-                      <a class="pen_btn"></a>
-                      <a class="del_btn"></a>
-                  </div>
-              </div>
-              <div class="i-section">
-                  <p class="title_item"></p>
-                  <textarea class="title_text" readonly></textarea>
-                  <p class="title_date" align="center"></p>
-              </div>
-          </div>
-          <div class="deleteElements">
-              <div class="del_wrapper">
-                  <a href="profile.html" style="color: #EA4643;" class="delbtn btn_delete_el">delete</a>
-                  <a href="#" style="color: #24BD4F;" class="delbtn btn_cancel">cancel</a>
-              </div>
-          </div>
-      </div>
+      <ShowForm ref="info-form"/>      
   </div>
 </template>
 
@@ -84,11 +31,15 @@
   import { signout } from '../helpers/fetch';
   import { userInfo } from '../helpers/fetch';
   import Todo from '../components/Todo.vue';
+  import ShowForm from '../components/ShowForm.vue';
+  import TodoForm from '../components/TodoForm.vue';
 
   export default {
     name: 'Home',
     components: {
-      Todo
+      Todo,
+      ShowForm,
+      TodoForm
     },
     created() {
       userInfo(localStorage.getItem("token")).then(data => {
@@ -121,6 +72,9 @@
             console.log(data);
           }
         });
+      },
+      showForm(index) {
+        
       }
     }
   }
