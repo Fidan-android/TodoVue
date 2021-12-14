@@ -10,7 +10,7 @@ const routes = [
     component: () => import("../views/Home.vue"),
     beforeEnter: ((to, from, next) => {
       if (localStorage.getItem("token")) {
-        next("/");
+        next();
       } else {
         next("/login");
       }
