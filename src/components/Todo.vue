@@ -1,5 +1,5 @@
 <template>
-    <div class="item dark">
+    <div class="item dark" @click="onShow">
         <h2>{{ title }}</h2>
         <p>{{ message }}</p>
         <label>Created at {{ created }}</label>
@@ -14,6 +14,12 @@
             title: String,
             message: String,
             created: String
-        }   
+        },
+        methods: {
+            onShow(e) {
+                e.preventDefault();
+                
+            }
+        }
     }
 </script>

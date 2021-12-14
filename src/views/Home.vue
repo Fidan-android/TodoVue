@@ -1,7 +1,7 @@
 <template>
   <div class="container">
       <div class="menu">
-          <a href="settings.html" class="btn_settings"></a>
+          <router-link to="/settings" class="btn_settings"></router-link>
           <div class="user__logo">
               <img src="../assets/img/user_mini.png" alt="User photo">
           </div>

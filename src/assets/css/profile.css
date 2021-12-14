@@ -43,6 +43,16 @@ textarea {
     left: 13px;
 }
 
+.back_profile {
+    background: url('../img/arrow_back.png') center no-repeat;
+    background-size: cover;
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    top: 11px;
+    left: 13px;
+}
+
 .user__logo {
     background: #fff;
     width: 100px;
