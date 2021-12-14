@@ -13,7 +13,7 @@
           <div class="content__wrapper">
               <p class="mini_title">list of todo</p>
               <div class="items" v-if="loaded">
-                
+                <Todo v-for="todo in todoes" :key="todo.id" :title="todo.title" :message="todo.message" :created="todo.created"></Todo>
               </div>
               <div class="no-item" v-if="!loaded">No todoes</div>
               <button class="btn_add"></button>
@@ -83,9 +83,13 @@
 <script>
   import { signout } from '../helpers/fetch';
   import { userInfo } from '../helpers/fetch';
+  import Todo from '../components/Todo.vue';
 
   export default {
     name: 'Home',
+    components: {
+      Todo
+    },
     created() {
       userInfo(localStorage.getItem("token")).then(data => {
         this.username = data['fullname'];

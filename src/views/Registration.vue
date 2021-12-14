@@ -24,7 +24,6 @@
 <script>
     import { registration} from '../helpers/fetch';
 
-
     export default {
         name: "Registration",
         methods: {
