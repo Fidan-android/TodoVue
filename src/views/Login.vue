@@ -66,7 +66,7 @@
                         }
 
                         default: {
-                            console.log(data['message']);
+                            console.log(data);
                             break;
                         }
                     }

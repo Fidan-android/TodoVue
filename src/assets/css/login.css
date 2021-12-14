@@ -48,6 +48,10 @@ a {
     height: 57px;
 }
 
+.field::placeholder {
+    color: rgba(39, 39, 39, 0.5);
+}
+
 .eye_element {
     background: url("../img/eye.png") center no-repeat;
     width: 27px;

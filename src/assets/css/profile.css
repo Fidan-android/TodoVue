@@ -155,7 +155,6 @@ textarea {
 }
 
 .content__wrapper {
-    margin-top: 111px;
     display: flex;
     flex-direction: column;
 }
@@ -318,7 +317,7 @@ textarea {
     cursor: pointer;
 }
 
-.field {
+.field-profile {
     border: 2px solid rgba(39, 39, 39, 0.5);;
     box-sizing: border-box;
     border-radius: 12px;

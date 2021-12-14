@@ -28,10 +28,10 @@
     export default {
         name: "Registration",
         methods: {
-            onSubmit: (e) => {
+            onSubmit(e) {
                 e.preventDefault();
+                var route = this.$router;
                 if (e.target.password.value === e.target.confirm_password.value) {
-                    var self = this;
                     registration(e.target).then(data => {
                         switch(data['code']) {
                             case "200": {
@@ -41,7 +41,7 @@
                                 message.innerHTML = "Аккаунт успешно создан";
                                 setTimeout(() => {
                                     message.style.display = "none";
-                                    this.$router.push("/login").catch(() => {});
+                                    route.push({path: "/login"}).catch(() => {})
                                 }, 3000);
                                 break;
                             }

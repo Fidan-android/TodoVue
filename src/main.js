@@ -10,4 +10,5 @@ new Vue({
 }).$mount('#app')
 
 import "./assets/css/normalize.css";
+import "./assets/css/profile.css";
 import "./assets/css/login.css";
