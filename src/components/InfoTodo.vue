@@ -2,7 +2,7 @@
     <div class="info_item">
           <div class="modal__content">
               <div class="i-header">
-                  <a class="arr_btn"></a>
+                  <a class="arr_btn" @click="onCloseForm"></a>
                   <div class="special_btns">
                       <a class="pen_btn"></a>
                       <a class="del_btn"></a>
@@ -30,6 +30,7 @@ export default {
         title: String,
         message: String,
         created: String,
+        onCloseForm: Function,
     }
 }
 </script>

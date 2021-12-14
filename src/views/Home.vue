@@ -21,9 +21,9 @@
       </div>
 
       <!-- Модальные окна -->
-      <TodoForm ref="todo_form" v-if="showModal"/>
+      <TodoForm ref="todo_form" v-if="showModal" :onCloseForm="onCloseForm"/>
 
-      <InfoTodo ref="infoForm" v-if="showInfo"/>      
+      <InfoTodo ref="infoForm" v-if="showInfo" :onCloseForm="onCloseForm"/>      
   </div>
 </template>
 
@@ -93,6 +93,10 @@
       },
       addTodo() {
         this.showModal = true;
+      },
+      onCloseForm() {
+        this.showModal = false;
+        this.showInfo = false;
       }
     }
   }

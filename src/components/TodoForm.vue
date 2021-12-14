@@ -3,7 +3,7 @@
           <div class="modal__content">
               <div class="m-header">
                   <h2 class="title">to do list</h2>
-                  <a class="close_btn" id="close"></a>
+                  <a class="close_btn" id="close" @click="this.onCloseForm"></a>
               </div>
               <div class="m-section" align="center">
                   <form>
@@ -24,6 +24,7 @@ export default {
         title: String,
         message: String,
         created: String,
+        onCloseForm: Function,
     }
 }
 </script>
