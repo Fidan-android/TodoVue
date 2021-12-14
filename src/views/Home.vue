@@ -16,14 +16,14 @@
                 <Todo v-for="todo in todoes" :key="todo.id" v-on:click.native="showForm(todo.id)" :title="todo.title" :message="todo.message" :created="todo.created"></Todo>
               </div>
               <div class="no-item" v-if="!loaded">No todoes</div>
-              <button class="btn_add"></button>
+              <button class="btn_add" @click="addTodo"></button>
           </div>
       </div>
 
       <!-- Модальные окна -->
-      <TodoForm ref="todo-form"/>
+      <TodoForm ref="todo_form" v-if="showModal"/>
 
-      <ShowForm ref="info-form"/>      
+      <InfoTodo ref="infoForm" v-if="showInfo"/>      
   </div>
 </template>
 
@@ -31,14 +31,14 @@
   import { signout } from '../helpers/fetch';
   import { userInfo } from '../helpers/fetch';
   import Todo from '../components/Todo.vue';
-  import ShowForm from '../components/ShowForm.vue';
+  import InfoTodo from '../components/InfoTodo.vue';
   import TodoForm from '../components/TodoForm.vue';
 
   export default {
     name: 'Home',
     components: {
       Todo,
-      ShowForm,
+      InfoTodo,
       TodoForm
     },
     created() {
@@ -51,6 +51,8 @@
       return {
         username: "",
         todoes: [],
+        showModal: false,
+        showInfo: false,
       }
     },
     computed: {
@@ -74,7 +76,23 @@
         });
       },
       showForm(index) {
+        var todo;
+        for (let i = 0; i < this.todoes.length; i++) {
+          if (this.todoes[i].id == index) {
+            todo = this.todoes[i];
+          }
+        }
         
+        var element = this.$refs.infoForm;
+        console.log(element);
+
+        this.showInfo = true;
+      },
+      closeForm(value) {
+        this.showInfo = false;
+      },
+      addTodo() {
+        this.showModal = true;
       }
     }
   }

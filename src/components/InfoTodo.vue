@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    name: "ShowForm",
+    name: "InfoTodo",
     props: {
         title: String,
         message: String,
