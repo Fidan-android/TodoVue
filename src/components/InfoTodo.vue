@@ -4,20 +4,20 @@
               <div class="i-header">
                   <a class="arr_btn" @click="onCloseForm"></a>
                   <div class="special_btns">
-                      <a class="pen_btn"></a>
-                      <a class="del_btn"></a>
+                      <a class="pen_btn" @click="onEdit"></a>
+                      <a class="del_btn" @click="onDelete"></a>
                   </div>
               </div>
               <div class="i-section">
-                  <p class="title_item"></p>
-                  <textarea class="title_text" readonly></textarea>
-                  <p class="title_date" align="center"></p>
+                  <p class="title_item">{{ title }}</p>
+                  <textarea class="title_text" readonly v-model="message"></textarea>
+                  <p class="title_date" align="center">{{ created }}</p>
               </div>
           </div>
-          <div class="deleteElements">
+          <div class="deleteElements" style="display: block;" >
               <div class="del_wrapper">
-                  <a href="profile.html" style="color: #EA4643;" class="delbtn btn_delete_el">delete</a>
-                  <a href="#" style="color: #24BD4F;" class="delbtn btn_cancel">cancel</a>
+                  <button style="color: #EA4643;" class="delbtn btn_delete_el" @click="this.onSubmitDelete">delete</button>
+                  <button style="color: #24BD4F;" class="delbtn btn_cancel" @click="this.onCancel">cancel</button>
               </div>
           </div>
       </div>
@@ -31,6 +31,10 @@ export default {
         message: String,
         created: String,
         onCloseForm: Function,
+        onDelete: Function,
+        onCancel: Function,
+        onSubmitDelete: Function,
+        onEdit: Function
     }
 }
 </script>

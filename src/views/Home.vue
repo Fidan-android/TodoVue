@@ -21,11 +21,12 @@
       </div>
 
       <!-- Модальные окна -->
-      <TodoForm ref="todo_form" v-if="showModal" :onCloseForm="onCloseForm" :onSubmit="onSubmit"/>
+      <TodoForm ref="todoForm" v-show="showModal" :onCloseForm="onCloseForm" :onSubmit="onSubmit"/>
       
-      <NewTodo ref="todo_form" v-if="showNewTodo" :onCloseForm="onCloseForm" :onSubmit="onCreateTodo"/>
+      <NewTodo ref="newForm" v-show="showNewTodo" :onCloseForm="onCloseForm" :onSubmit="onCreateTodo"/>
 
-      <InfoTodo ref="infoForm" v-if="showInfo" :onCloseForm="onCloseForm"/>      
+      <InfoTodo ref="infoForm" v-show="showInfo" :onCloseForm="onCloseForm" :title="todo.title"
+            :message="todo.message" :created="todo.created"/>      
   </div>
 </template>
 
@@ -59,6 +60,7 @@
         showModal: false,
         showInfo: false,
         showNewTodo: false,
+        todo: {}
       }
     },
     computed: {
@@ -82,13 +84,12 @@
         });
       },
       showForm(index) {
-        var todo;
+        
         for (let i = 0; i < this.todoes.length; i++) {
           if (this.todoes[i].id == index) {
-            todo = this.todoes[i];
+            this.todo = this.todoes[i];
           }
-        }
-        console.log(todo);
+        };
 
         this.showInfo = true;
       },
@@ -105,8 +106,10 @@
         createTodo(localStorage.getItem("token"), e.target).then((data) => {
           this.onCloseForm();
           this.todoes = data['todoes'];
-
         });
+      },
+      onSubmit(e) {
+        
       }
     }
   }
