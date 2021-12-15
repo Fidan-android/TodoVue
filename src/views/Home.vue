@@ -119,6 +119,7 @@
       onCreateTodo(e) {
         e.preventDefault();
         createTodo(localStorage.getItem("token"), e.target).then((data) => {
+          e.target.reset();
           this.onCloseForm();
           this.todoes = data['todoes'];
         });
