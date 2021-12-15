@@ -2,8 +2,7 @@
   <div class="container">
       <div class="menu">
           <router-link to="/settings" class="btn_settings"></router-link>
-          <div class="user__logo">
-              <img src="../assets/img/user_mini.png" alt="User photo">
+          <div class="user__logo" v-bind:style="{ 'background-image': 'url(' + userphoto + ')', 'background-size': 'cover'}">
           </div>
           <p>{{ username }}</p>
           <button class="m-white_btn" @click="onExit">log out</button>
@@ -55,12 +54,14 @@
     created() {
       userInfo(localStorage.getItem("token")).then(data => {
         this.username = data['fullname'];
+        this.userphoto = "http://a91745zj.beget.tech/user/imgs/" + data['photo_name'];
         this.todoes = data['todoes'];
       });
     },
     data(){
       return {
         username: "",
+        userphoto: "",
         todoes: [],
         showModal: false,
         showInfo: false,

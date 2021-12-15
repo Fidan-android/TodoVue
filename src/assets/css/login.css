@@ -81,22 +81,6 @@ a {
     margin-top: 6px;
 }
 
-input[type="submit"]{
-    background: linear-gradient(102.06deg, #6E87E0 -13.79%, rgba(17, 43, 133, 0.85) 107.74%);
-    border-radius: 12px;
-    outline: 0;
-    border: 0;
-    letter-spacing: 0.05em;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    text-transform: uppercase;
-    height: 78px;
-    margin-top: 22px;
-    color: #FFFFFF;
-    cursor: pointer;
-}
-
 label{
     font-style: normal;
     font-weight: normal;

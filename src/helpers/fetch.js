@@ -71,3 +71,18 @@ export async function editTodo(token, forma) {
 
     return response.json();
 }
+
+export async function changeImage(token, file) {
+    var data = new FormData();
+    data.append('avatar', file);
+
+    var response = await fetch('http://a91745zj.beget.tech/user/user-photo.php', {
+        method: 'POST',
+        headers: {
+            "Authorization" : "Bearer " + token
+        },
+        body: data
+    })
+
+    return response.json();
+}

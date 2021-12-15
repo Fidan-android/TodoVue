@@ -14,12 +14,30 @@
             <a class="eye_element_confirm" id="show"></a>
             <a class="eye_line_confirm" id="hide"></a>
         </div>
-        <input type="submit" value="sign in">
+        <input type="submit" value="sign in" class="registration-input">
         <label id="message" style="display: none;"></label>
     </form>
     <label>Don't have an account?&nbsp;<router-link to="/login">Sign in</router-link></label>
 </div>
 </template>
+
+<style>
+.registration-input{
+    background: linear-gradient(102.06deg, #6E87E0 -13.79%, rgba(17, 43, 133, 0.85) 107.74%);
+    border-radius: 12px;
+    outline: 0;
+    border: 0;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: uppercase;
+    height: 78px;
+    margin-top: 22px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+</style>
 
 <script>
     import { registration} from '../helpers/fetch';
