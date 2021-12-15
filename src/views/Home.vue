@@ -21,14 +21,15 @@
       </div>
 
       <!-- Модальные окна -->
-      <EditTodo ref="todoForm" v-show="showModal" :onCloseForm="onCloseForm" :onSubmit="() => {  }"/>
+      <EditTodo ref="todoForm" v-show="showModal" :onCloseForm="onCloseForm" :onSubmit="onConfirmEdit"
+            :id.sync="todo.id" :title.sync="todo.title" :message.sync="todo.message" :created.sync="todo.created"/>
       
       <NewTodo ref="newForm" v-show="showNewTodo" :onCloseForm="onCloseForm" :onSubmit="onCreateTodo"/>
 
       <InfoTodo ref="infoForm" v-show="showInfo" :onCloseForm="onCloseForm" :id="idTodo" :title="todo.title"
             :message="todo.message" :created="todo.created" :isDelete="isDelete" 
               :onDelete="() => {this.isDelete = true; }" :onEdit="onEdit" :onCancel="() => { this.isDelete = false; }"
-               :onConfirm="onConfirm"/>      
+               :onConfirm="onConfirmDelete"/>      
   </div>
 </template>
 
@@ -37,6 +38,7 @@
   import { userInfo } from '../helpers/fetch';
   import { createTodo } from '../helpers/fetch';
   import { deleteTodo } from '../helpers/fetch';
+  import { editTodo } from '../helpers/fetch';
   import Todo from '../components/Todo.vue';
   import InfoTodo from '../components/InfoTodo.vue';
   import EditTodo from '../components/EditTodo.vue';
@@ -123,17 +125,25 @@
 
 
       onEdit() {
-        
+        this.onCloseForm();
+        this.showModal = true;
       },
 
 
-      onConfirm() {
-        
+      onConfirmDelete() {
         deleteTodo(localStorage.getItem("token"), this.idTodo).then(data => {
           this.onCloseForm();
           this.todoes = data['todoes'];
         });        
       },
+
+      onConfirmEdit(e) {
+        e.preventDefault();
+        editTodo(localStorage.getItem("token"), e.target).then(data => {
+          this.onCloseForm();
+          this.todoes = data['todoes'];
+        });
+      }
 
     }
   }
