@@ -19,7 +19,7 @@
 
 <script>
 export default {
-    name: "TodoForm",
+    name: "EditTodo",
     props: {
         title: String,
         message: String,

@@ -47,3 +47,15 @@ export async function createTodo(token, forma) {
 
     return response.json();
 }
+
+export async function deleteTodo(token, todo_id) {
+    var response = await fetch("http://a91745zj.beget.tech/user/delete-todo.php", {
+        method: "POST",
+        headers: {
+            "Authorization" : "Bearer " + token
+        },
+        body: JSON.stringify({todo_id : todo_id})
+    });
+
+    return response.json();
+}

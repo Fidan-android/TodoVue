@@ -21,12 +21,13 @@
       </div>
 
       <!-- Модальные окна -->
-      <TodoForm ref="todoForm" v-show="showModal" :onCloseForm="onCloseForm" :onSubmit="onSubmit"/>
+      <EditTodo ref="todoForm" v-show="showModal" :onCloseForm="onCloseForm" :onSubmit="onSubmit"/>
       
       <NewTodo ref="newForm" v-show="showNewTodo" :onCloseForm="onCloseForm" :onSubmit="onCreateTodo"/>
 
-      <InfoTodo ref="infoForm" v-show="showInfo" :onCloseForm="onCloseForm" :title="todo.title"
-            :message="todo.message" :created="todo.created"/>      
+      <InfoTodo ref="infoForm" v-show="showInfo" :onCloseForm="onCloseForm" :id="idTodo" :title="todo.title"
+            :message="todo.message" :created="todo.created" :isDelete="isDelete" 
+              :onDelete="onDelete" :onEdit="onEdit" :onCancel="onCancel" :onConfirm="onConfirm"/>      
   </div>
 </template>
 
@@ -34,9 +35,10 @@
   import { signout } from '../helpers/fetch';
   import { userInfo } from '../helpers/fetch';
   import { createTodo } from '../helpers/fetch';
+  import { deleteTodo } from '../helpers/fetch';
   import Todo from '../components/Todo.vue';
   import InfoTodo from '../components/InfoTodo.vue';
-  import TodoForm from '../components/TodoForm.vue';
+  import EditTodo from '../components/EditTodo.vue';
   import NewTodo from '../components/NewTodo.vue';
 
   export default {
@@ -44,7 +46,7 @@
     components: {
       Todo,
       InfoTodo,
-      TodoForm,
+      EditTodo,
       NewTodo
     },
     created() {
@@ -60,7 +62,10 @@
         showModal: false,
         showInfo: false,
         showNewTodo: false,
-        todo: {}
+        todo: {},
+        isDelete: false,
+        idTodo: "",
+
       }
     },
     computed: {
@@ -69,6 +74,8 @@
       }
     },
     methods: {
+
+
       onExit(e) {
         e.preventDefault();
         var route = this.$router;
@@ -83,6 +90,8 @@
           }
         });
       },
+
+
       showForm(index) {
         
         for (let i = 0; i < this.todoes.length; i++) {
@@ -90,17 +99,24 @@
             this.todo = this.todoes[i];
           }
         };
-
+        this.idTodo = this.todo.id;
         this.showInfo = true;
       },
+
+      
       addTodo() {
         this.showNewTodo = true;
       },
+
+
       onCloseForm() {
         this.showModal = false;
         this.showInfo = false;
         this.showNewTodo = false;
+        this.isDelete = false;
       },
+
+
       onCreateTodo(e) {
         e.preventDefault();
         createTodo(localStorage.getItem("token"), e.target).then((data) => {
@@ -108,9 +124,34 @@
           this.todoes = data['todoes'];
         });
       },
-      onSubmit(e) {
+
+
+      onDelete() {
+        this.isDelete = true;
+      },
+
+
+      onEdit() {
+
+      },
+
+
+      onCancel() {
+        this.isDelete = false;
+      },
+
+
+      onConfirm() {
         
-      }
+        deleteTodo(localStorage.getItem("token"), this.idTodo).then(data => {
+          this.onCloseForm();
+          this.todoes = data['todoes'];
+        });        
+      },
+
+      onSubmit() {
+
+      },
     }
   }
 </script>

@@ -14,9 +14,9 @@
                   <p class="title_date" align="center">{{ created }}</p>
               </div>
           </div>
-          <div class="deleteElements" style="display: block;" >
+          <div class="deleteElements" style="display: block;" v-show="isDelete">
               <div class="del_wrapper">
-                  <button style="color: #EA4643;" class="delbtn btn_delete_el" @click="this.onSubmitDelete">delete</button>
+                  <button style="color: #EA4643;" class="delbtn btn_delete_el" @click="this.onConfirm">delete</button>
                   <button style="color: #24BD4F;" class="delbtn btn_cancel" @click="this.onCancel">cancel</button>
               </div>
           </div>
@@ -27,14 +27,16 @@
 export default {
     name: "InfoTodo",
     props: {
+        id: String,
         title: String,
         message: String,
         created: String,
         onCloseForm: Function,
         onDelete: Function,
         onCancel: Function,
-        onSubmitDelete: Function,
-        onEdit: Function
+        onConfirm: Function,
+        onEdit: Function,
+        isDelete: Boolean,
     }
 }
 </script>
