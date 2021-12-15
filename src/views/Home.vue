@@ -16,18 +16,19 @@
                 <Todo v-for="todo in todoes" :key="todo.id" v-on:click.native="showForm(todo.id)" :title="todo.title" :message="todo.message" :created="todo.created"></Todo>
               </div>
               <div class="no-item" v-if="!loaded">No todoes</div>
-              <button class="btn_add" @click="addTodo"></button>
+              <button class="btn_add" @click="() => { this.showNewTodo = true; }"></button>
           </div>
       </div>
 
       <!-- Модальные окна -->
-      <EditTodo ref="todoForm" v-show="showModal" :onCloseForm="onCloseForm" :onSubmit="onSubmit"/>
+      <EditTodo ref="todoForm" v-show="showModal" :onCloseForm="onCloseForm" :onSubmit="() => {  }"/>
       
       <NewTodo ref="newForm" v-show="showNewTodo" :onCloseForm="onCloseForm" :onSubmit="onCreateTodo"/>
 
       <InfoTodo ref="infoForm" v-show="showInfo" :onCloseForm="onCloseForm" :id="idTodo" :title="todo.title"
             :message="todo.message" :created="todo.created" :isDelete="isDelete" 
-              :onDelete="onDelete" :onEdit="onEdit" :onCancel="onCancel" :onConfirm="onConfirm"/>      
+              :onDelete="() => {this.isDelete = true; }" :onEdit="onEdit" :onCancel="() => { this.isDelete = false; }"
+               :onConfirm="onConfirm"/>      
   </div>
 </template>
 
@@ -103,11 +104,6 @@
         this.showInfo = true;
       },
 
-      
-      addTodo() {
-        this.showNewTodo = true;
-      },
-
 
       onCloseForm() {
         this.showModal = false;
@@ -126,18 +122,8 @@
       },
 
 
-      onDelete() {
-        this.isDelete = true;
-      },
-
-
       onEdit() {
-
-      },
-
-
-      onCancel() {
-        this.isDelete = false;
+        
       },
 
 
@@ -149,9 +135,6 @@
         });        
       },
 
-      onSubmit() {
-
-      },
     }
   }
 </script>
