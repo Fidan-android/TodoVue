@@ -35,3 +35,15 @@ export async function userInfo(token) {
 
     return response.json();
 }
+
+export async function createTodo(token, forma) {
+    var response = await fetch("http://a91745zj.beget.tech/user/create-todo.php", {
+        method: "POST",
+        headers: {
+            "Authorization" : "Bearer " + token
+        },
+        body: JSON.stringify(Object.fromEntries((new FormData(forma)).entries()))
+    });
+
+    return response.json();
+}

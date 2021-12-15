@@ -21,7 +21,9 @@
       </div>
 
       <!-- Модальные окна -->
-      <TodoForm ref="todo_form" v-if="showModal" :onCloseForm="onCloseForm"/>
+      <TodoForm ref="todo_form" v-if="showModal" :onCloseForm="onCloseForm" :onSubmit="onSubmit"/>
+      
+      <NewTodo ref="todo_form" v-if="showNewTodo" :onCloseForm="onCloseForm" :onSubmit="onCreateTodo"/>
 
       <InfoTodo ref="infoForm" v-if="showInfo" :onCloseForm="onCloseForm"/>      
   </div>
@@ -30,16 +32,19 @@
 <script>
   import { signout } from '../helpers/fetch';
   import { userInfo } from '../helpers/fetch';
+  import { createTodo } from '../helpers/fetch';
   import Todo from '../components/Todo.vue';
   import InfoTodo from '../components/InfoTodo.vue';
   import TodoForm from '../components/TodoForm.vue';
+  import NewTodo from '../components/NewTodo.vue';
 
   export default {
     name: 'Home',
     components: {
       Todo,
       InfoTodo,
-      TodoForm
+      TodoForm,
+      NewTodo
     },
     created() {
       userInfo(localStorage.getItem("token")).then(data => {
@@ -53,6 +58,7 @@
         todoes: [],
         showModal: false,
         showInfo: false,
+        showNewTodo: false,
       }
     },
     computed: {
@@ -82,21 +88,25 @@
             todo = this.todoes[i];
           }
         }
-        
-        var element = this.$refs.infoForm;
-        console.log(element);
+        console.log(todo);
 
         this.showInfo = true;
       },
-      closeForm(value) {
-        this.showInfo = false;
-      },
       addTodo() {
-        this.showModal = true;
+        this.showNewTodo = true;
       },
       onCloseForm() {
         this.showModal = false;
         this.showInfo = false;
+        this.showNewTodo = false;
+      },
+      onCreateTodo(e) {
+        e.preventDefault();
+        createTodo(localStorage.getItem("token"), e.target).then((data) => {
+          this.onCloseForm();
+          this.todoes = data['todoes'];
+
+        });
       }
     }
   }
