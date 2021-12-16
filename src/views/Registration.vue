@@ -5,14 +5,14 @@
         <input type="email" placeholder="Email" name="login" class="field" required>
         <input type="text" placeholder="Fullname" name="fullname" class="field" required>
         <input type="password" placeholder="Password" name="password" class="field" id="pass" required>
-        <div id="eye">
+        <div id="eye" @click="showPassword">
             <a class="eye_element_reg" id="show"></a>
-            <a class="eye_line_reg" id="hide"></a>
+            <a class="eye_line_reg" id="hide" style="display: none;"></a>
         </div>
         <input type="password" placeholder="Confirm password" name="confirm_password" id="confirm_pass" class="field" required>
-        <div id="eye">
-            <a class="eye_element_confirm" id="show"></a>
-            <a class="eye_line_confirm" id="hide"></a>
+        <div id="eye_confirm" @click="showConfirmPassword">
+            <a class="eye_element_confirm" id="show_confirm"></a>
+            <a class="eye_line_confirm" id="hide_confirm" style="display: none;"></a>
         </div>
         <input type="submit" value="sign in" class="registration-input">
         <label id="message" style="display: none;"></label>
@@ -75,6 +75,28 @@
                     setTimeout(() => {
                         message.style.display = "none";
                     }, 3000);
+                }
+            },
+
+            showPassword() {
+                var hide = document.getElementById("hide");
+                if (hide.style.display == 'none') {
+                    hide.style.display = "block";
+                    (document.getElementById("pass")).type = "text";
+                } else {
+                    hide.style.display = "none";
+                    (document.getElementById("pass")).type = "password";
+                }
+            },
+
+            showConfirmPassword() {
+                var hide = document.getElementById("hide_confirm");
+                if (hide.style.display == 'none') {
+                    hide.style.display = "block";
+                    (document.getElementById("confirm_pass")).type = "text";
+                } else {
+                    hide.style.display = "none";
+                    (document.getElementById("confirm_pass")).type = "password";
                 }
             }
         }

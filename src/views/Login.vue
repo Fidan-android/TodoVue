@@ -4,9 +4,9 @@
         <form class="form" @submit="onSubmit">
             <input type="email" placeholder="Email" name="login" class="field" required>
             <input type="password" placeholder="Password" name="password" class="field" id="pass" required>
-            <div id="eye">
+            <div id="eye" @click="showPassword">
                 <a href="#" class="eye_element" id="show"></a>
-                <a href="#" class="eye_line" id="hide"></a>
+                <a href="#" class="eye_line" style="display:none;" id="hide"></a>
             </div>
 
             <router-link to="/password-recovery" class="ret-but">Forgot Password?</router-link>
@@ -89,6 +89,17 @@
                         }
                     }
                 });
+            },
+
+            showPassword() {
+                var hide = document.getElementById("hide");
+                if (hide.style.display == 'none') {
+                    hide.style.display = "block";
+                    (document.getElementById("pass")).type = "text";
+                } else {
+                    hide.style.display = "none";
+                    (document.getElementById("pass")).type = "password";
+                }
             }
         }
 }
